@@ -1,0 +1,93 @@
+const user = require("../database/user.json");
+const fs = require("fs");
+const path = require("path");
+const bcryptjs = require("bcryptjs");
+const multer = require("multer");
+const { validationResult } = require("express-validator"); //requiere una funcion de express validator, se le pasa todo el req
+
+const controller = {
+    register: function (req, res) {
+        return res.render("../views/registro")
+    },
+
+    processRegister: function (req, res) {
+        const resultValidation = validationResult(req);  //guardo en una variable si hay errores
+
+        if (resultValidation.errors.length > 0) {
+            return res.render("../views/registro", {
+                errors: resultValidation.mapped(),
+                oldData:req.body //mapped convierte el array en un objeto literal
+            });
+        }
+        return res.send ("validaciones pasadas correctamente sin errores");
+    },
+
+}
+module.exports = controller;
+
+
+
+
+
+
+
+        /*
+        let userInDB = user.findByField ("mail" , req.body.mail)
+
+        if (userInDB) {
+            return res.render ("./vista", {error: {msg : "este mail ya esta registrado"},oldData: req.body});
+        }
+//crea usuario en base a lo que ingreso el usuario, pero encripta la clave y guarda la imagen (avatar)
+// con la propiedad file de multer
+        let userToCreate = {
+            ...req.body,
+            password: bcryptjs.hashSync(req.body.password, 10),
+            avatar: req.file.filname
+        };
+
+
+        let userCreate = user.create (userToCreate)
+        return res.redirect ("/login") //despues de crear el usuario redirigir a la vista login
+        },
+
+        login: function(req,res) {
+
+        }
+
+        processLogin: function (req, res) {
+            //creo una variable para validar que no se encuentre ese mail ya registrado
+            let userToLogin = user.findByField ("email", req.body.mail)
+            //si lo encuentra sigue con la validacion de la clave, comparando lo que esta en la base hasheado
+            //con lo que escribio el usuario
+            if (userToLogin) {
+                let isOkPassword = bcryptjs.compareSync (req.body.password, userToLogin.password);
+                //el compare devuelve true o false
+                //si es true redirecciona a la pagina de usuario
+                if (isOkPassword) {
+                    return res.redirect("/perfildelusuario")
+                }
+                return res.render ("/vista de login", {errors:{
+                    mail : {
+                        msg: "credenciales invalidas"
+                    }
+                }});
+                }
+                //si es false muestra la pagina del login con los errores
+                return res.render ("/vista de login", {errors:{
+                    mail : {
+                        msg: "no se encuentra el mail en la base de datos"
+                    }
+                }})
+                
+            },
+
+            profile: function (req,res) {
+                
+            }
+
+            
+        }
+        */
+
+
+

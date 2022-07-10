@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <head>
+        <style>
+            body {
+                text-align: center;
+                background-color: black;
+                color: red;
+            }
+
+            input {
+                height: 30px;
+                width: 300px;
+                color: red
+            }
+
+            label {
+                font-size: 30px;
+            }
+        </style>
+    </head>
+
+    <form action="/user/register" class="form" method="POST" enctype="multipart/form-data">
+        <!--el enctype es lo que habilita la carga de imagenes, si el form no tiene carga de imagen no poner-->
+
+        <label for="name" class="label">Nombre completo: </label>
+        <input type="text" name="fullName" id="name" placeholder="Ingrese su Nombre" value= "<%= locals.oldData ? oldData.fullName : null %>"> <!--value me trae el oldData que declare en el controller para que guarde lo que escribio el usuario si esta correcto-->
+
+        <% if (locals.errors && errors.fullName) { %>
+            <!--si dentro de la variable locals(variable que siempre existe en las vistas o controllers) si existen errores Y el error esta en fullName-->
+            <div class="text-danger">
+                <!--la clase text danger pone la letra en rojo-->
+                <%= errors.fullName.msg %>
+            </div>
+
+            <% } %>
+
+                <br><br>
+
+                <label for="email" class="label">Email: </label>
+                <input type="email" name="email" id="email" placeholder="Ingrese su Email" value= "<%= locals.oldData ? oldData.email : null %>">
+                <% if (locals.errors && errors.email) { %>
+                    <!--si existen errores Y el error esta en email-->
+                    <div class="text-danger">
+                        <!--la clase text danger pone la letra en rojo-->
+                        <%= errors.email.msg %>
+                    </div>
+
+                    <% } %>
+                        <br><br>
+
+                        <label for="password" class="label">Contraseña: </label>
+                        <input type="password" name="password" id="new-password" placeholder="Contraseña" value= "<%= locals.oldData ? oldData.password : null %>">
+                        <% if (locals.errors && errors.password) { %>
+                            <!--si existen errores Y el error esta en password-->
+                            <div class="text-danger">
+                                <!--la clase text danger pone la letra en rojo-->
+                                <%= errors.password.msg %>
+                            </div>
+
+                            <% } %>
+                                <br><br>
+                            <!-- el select muestra las opciones leidas de un array de paises -->
+                                <label for="country">Pais de Nacimiento</label>
+
+                                <select name="country" id="">Pais
+
+                                    <option value="">Elegi un pais</option>
+
+                                    <% let countries = ["Argentina", "Brasil", "Colombia", "Chile", "Ecuador"] %> 
+
+                                    <!---en el for compara lo seleccionado y lo guarda, con el if ternario le dice que lo guarde-->
+                                    <% for( const oneCountry in countries ) { %>
+                                        <option
+                                        value = "<%= oneCountry %>" 
+                                        <%= locals.oldData && (oneCountry === oldData.country) ? "selected" : null %> >
+                                        >  <%= countries[oneCountry] %> </option>
+                                    <% } %>
+                                </select>
+                                <% if (locals.errors && errors.countries) { %>
+                                    <!--si existen errores Y el error esta en countries-->
+                                    <div class="text-danger">
+                                        <!--la clase text danger pone la letra en rojo-->
+                                        <%= errors.countries.msg %>
+                                    </div>
+                                    <% } %>
+
+                                <br><br>
+
+                                <label for="avatar">Avatar: </label>
+                                <input type="file" name="avatar">
+                                <% if (locals.errors && errors.avatar) { %>
+                                    <!--si existen errores Y el error esta en avatar-->
+                                    <div class="text-danger">
+                                        <!--la clase text danger pone la letra en rojo-->
+                                        <%= errors.avatar.msg %>
+                                    </div>
+                                    <% } %>
+                                <br><br>
+
+                                <input type="submit" value="enviar">
+
+    </form>
+
+</body>
+
+</html>
