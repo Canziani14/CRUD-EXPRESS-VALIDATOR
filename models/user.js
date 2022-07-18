@@ -4,7 +4,7 @@ const fs = require ("fs");
 const user = {
 
     //trae el archivo json
-    filename: "user.json",
+    filename: "./database/user.json",
 
     //convierte el archivo json en un array de objetos literales
     getData: function () {
@@ -53,9 +53,9 @@ const user = {
         //creamos nuevo usuario y especuficamos que id va a ser la propiedad generateID
         let newUser = {   
             id: this.generateID(),
-            ...userData
+            ...userData,
         }
-        allUsers.push(newUser);  //dentro de allUser metemos el nuwUser
+        allUsers.push(newUser);  //dentro de allUser metemos el newUser
         fs.writeFileSync(this.filename, JSON.stringify (allUsers, null, " ")); // escribimos el archivo con el newUser
         return ("Usuario Creado");
     },
@@ -75,5 +75,6 @@ const user = {
 
     }
 }
+
 
 module.exports = user

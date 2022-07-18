@@ -1,5 +1,9 @@
 const express = require ("express");
 const app = express();
+//rutas
+const mainRoutes = require ("./routes/mainRouter");
+const userRoutes = require ("./routes/userRouter");
+
 
 //indico que la carpeta dinamica es public
 app.use (express.static ("./public"));
@@ -15,9 +19,8 @@ app.listen (3000, function (){
 //defino ejs
 app.set ("view engine", "ejs");
 
-//rutas
-//const mainRoutes = require ("./routes/mainRouter");
-const userRoutes = require ("./routes/userRouter");
 
-//app.use ("/", mainRoutes);
+
+app.use ("/", mainRoutes);
 app.use ("/user", userRoutes);
+

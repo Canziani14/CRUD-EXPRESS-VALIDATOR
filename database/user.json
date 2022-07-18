@@ -1,17 +1,9 @@
 [
  {
   "id": 1,
-  "name": "matias",
-  "mail": "mcanziani12@gmail.com"
- },
- {
-  "id": 2,
-  "name": "gabriel",
-  "mail": "gabo@gmail.com"
- },
- {
-  "id": 3,
-  "name": "tulio",
-  "mail": "tulio@gmail.com"
+  "fullName": "Matias Canziani",
+  "email": "mcanziani12@gmail.com",
+  "password": "$2a$10$Dl6IHLAOTXh3thknoKJuMeeWT2MSEHGR9NLzmbTgt.b1d2hUJjhFm",
+  "country": "1"
  }
 ]
