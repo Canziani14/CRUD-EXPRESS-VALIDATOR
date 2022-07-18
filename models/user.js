@@ -45,7 +45,6 @@ const user = {
             return lastUser.id +1 ; // le suma 1 al ultimo id
         }
         return 1 ; // y si detecta que no hay nada empieza por el id 1
-
     },
 
     create: function (userData) {
