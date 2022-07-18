@@ -33,7 +33,7 @@ const controller = {
         let userToCreate = {
             ...req.body,
             password: bcryptjs.hashSync(req.body.password, 10),
-            avatar: req.file.filname
+            avatar: req.file.filename
         };
 
 
