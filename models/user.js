@@ -42,7 +42,7 @@ const user = {
         let allUsers = this.findAll();
         let lastUser = allUsers.pop (); //guarda el ultimo usuario creado para tener el ultimo id
         if (lastUser) {
-            return lastUser.id +1 ; // le suma 1 al ultimo id
+            return lastUser.id ; // le suma 1 al ultimo id
         }
         return 1 ; // y si detecta que no hay nada empieza por el id 1
     },

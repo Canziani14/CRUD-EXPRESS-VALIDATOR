@@ -8,15 +8,48 @@ const user = require("../models/user");
 const validaciones = require("../middlewares/validateRegisterMiddleware");
 const uploadFile = require("../middlewares/multerMiddleware");
 
+
+
+
 const controller = {
     register: function (req, res) {
         return res.render("../views/registro")
     },
 
     processRegister: function (req, res) {
-        const resultValidation = validationResult(req);  //guardo en una variable si hay errores
+        let resultValidation = validationResult(req);
 
         if (resultValidation.errors.length > 0) {
+            return res.render("../views/registro", {
+                errors: resultValidation.mapped(),
+                oldData: req.body //mapped convierte el array en un objeto literal
+            })
+        };
+
+        if (resultValidation.isEmpty()) {
+          let user = {
+            ...req.body,
+            password: bcryptjs.hashSync(req.body.password, 10),
+            avatar:  req.file ? req.file.filename : '',
+          }
+          let archivoUsers = fs.readFileSync(path.resolve(__dirname, '../database/user.json'), {
+            encoding: 'utf-8'
+          });
+          let users;
+          if (archivoUsers == "") {
+            users = [];
+          } else {
+            users = JSON.parse(archivoUsers);
+          };
+    
+          users.push(user);
+          usersJSON = JSON.stringify(users, null, 2);
+          fs.writeFileSync(path.resolve(__dirname, '../database/user.json'), usersJSON);
+          res.redirect('/user/login');
+        }
+
+
+      /*  if (resultValidation.errors.length > 0) {
             return res.render("../views/registro", {
                 errors: resultValidation.mapped(),
                 oldData: req.body //mapped convierte el array en un objeto literal
@@ -40,7 +73,7 @@ const controller = {
         let userCreate = user.create(userToCreate)
 
         return res.redirect("/user/login"); //despues de crear el usuario redirigir a la vista login
-
+*/
 
     },
 
