@@ -11,6 +11,8 @@ const uploadFile = require("../middlewares/multerMiddleware");
 
 
 
+
+
 const controller = {
     register: function (req, res) {
         return res.render("../views/registro")
@@ -19,6 +21,14 @@ const controller = {
     processRegister: function (req, res) {
         let resultValidation = validationResult(req);
 
+        let userInDB = user.findByField("email", req.body.email) // validacion para ver si el email ya esta registrado en la base de datos
+        //con el if pregunto si el usuario esta en la base devuelvo error, si no esta, lo crea
+        if (userInDB) {
+            console.log(userInDB)
+            return res.render("../views/registro", { error: { msg: "este mail ya esta registrado" }, oldData: req.body });
+        }
+        
+
         if (resultValidation.errors.length > 0) {
             return res.render("../views/registro", {
                 errors: resultValidation.mapped(),
@@ -26,15 +36,19 @@ const controller = {
             })
         };
 
+       
+        
+
         if (resultValidation.isEmpty()) {
           let user = {
             ...req.body,
             password: bcryptjs.hashSync(req.body.password, 10),
             avatar:  req.file ? req.file.filename : '',
           }
-          let archivoUsers = fs.readFileSync(path.resolve(__dirname, '../database/user.json'), {
-            encoding: 'utf-8'
-          });
+
+       
+
+          let archivoUsers = fs.readFileSync(path.resolve(__dirname, '../database/user.json'), {encoding: 'utf-8'});
           let users;
           if (archivoUsers == "") {
             users = [];

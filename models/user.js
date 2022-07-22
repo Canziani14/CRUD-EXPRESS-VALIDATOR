@@ -53,6 +53,7 @@ const user = {
         let newUser = {   
             id: this.generateID(),
             ...userData,
+            
         }
         allUsers.push(newUser);  //dentro de allUser metemos el newUser
         fs.writeFileSync(this.filename, JSON.stringify (allUsers, null, " ")); // escribimos el archivo con el newUser
