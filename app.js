@@ -1,4 +1,5 @@
 const express = require ("express");
+const { body } = require("express-validator");
 const app = express();
 const path = require("path")
 //rutas
@@ -10,6 +11,7 @@ const userRoutes = require ("./routes/userRouter");
 app.use (express.static ("./public"));
 
 //indico que capture todo lo que se envie desde un formulario via post
+app.use(express.json())
 app.use(express.urlencoded({extended:false}));
 
 //levanto el servidor
@@ -25,4 +27,6 @@ app.set ("view engine", "ejs");
 
 app.use ("/", mainRoutes);
 app.use ("/user", userRoutes);
+app.use ("/profile", userRoutes);
+
 

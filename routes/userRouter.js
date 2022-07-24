@@ -11,20 +11,19 @@ const uploadFile = require ("../middlewares/multerMiddleware");
 
 //formulario de registro
 router.get("/register", userController.register);
-
-router.get ("/login",userController.login);
-
-
-
 //procesamiento de registro
 
 router.post("/register",uploadFile.single("avatar"), validaciones , userController.processRegister);  //el upload lleva entre los parentecis el name del input que tiene en el form
 
 
 //formulario de login
-router.get ("/login", userController.login);
-/*
+router.get ("/login",userController.login);
+//procesamiento login
+router.post ("/login",validaciones, userController.processLogin);
+
 //perfil del usuario
-router.get ("/profile/:userId", userController.profile);
-*/
+router.get ("/:userId", userController.profile);
+
+
+
 module.exports = router;

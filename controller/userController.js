@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const bcryptjs = require("bcryptjs");
 const multer = require("multer");
-const { validationResult } = require("express-validator"); //requiere una funcion de express validator, se le pasa todo el req
+const { validationResult, body } = require("express-validator"); //requiere una funcion de express validator, se le pasa todo el req
 const user = require("../models/user");
 const validaciones = require("../middlewares/validateRegisterMiddleware");
 const uploadFile = require("../middlewares/multerMiddleware");
@@ -14,12 +14,15 @@ const uploadFile = require("../middlewares/multerMiddleware");
 
 
 const controller = {
-    register: function (req, res) {
-        return res.render("../views/registro")
-    },
 
+    //Trae el formulario de registro
+    register: function (req, res) {
+        return res.render("registro")
+    },
+    // Procesa el registro
     processRegister: function (req, res) {
         let resultValidation = validationResult(req);
+        
 
         let userInDB = user.findByField("email", req.body.email) // validacion para ver si el email ya esta registrado en la base de datos
         //con el if pregunto si el usuario esta en la base devuelvo error, si no esta, lo crea
@@ -38,7 +41,7 @@ const controller = {
 
 
         if (resultValidation.errors.length > 0) {
-            return res.render("../views/registro", {
+            return res.render("registro", {
                 errors: resultValidation.mapped(),
                 oldData: req.body //mapped convierte el array en un objeto literal
             })
@@ -59,7 +62,7 @@ const controller = {
 
             let userCreate = user.create(userToCreate)
 
-            return res.redirect("/user/login"); //despues de crear el usuario redirigir a la vista login
+            return res.redirect("login"); //despues de crear el usuario redirigir a la vista login
         }
 
 
@@ -78,22 +81,33 @@ const controller = {
         res.redirect('/user/login');
     },
 
+    //Trae el formilario de login
 
     login: function (req, res) {
-        return res.render("../views/login")
+        return res.render("login")
     },
 
+    //Procesa el formulario de login
+
     processLogin: function (req, res) {
+        
+        return res.send(req.body)
+      
+        
+        
+        /*
+        
         //creo una variable para validar que no se encuentre ese mail ya registrado
-        let userToLogin = user.findByField("email", req.body.mail)
+        let userToLogin = user.findByField("email", req.body.email)
         //si lo encuentra sigue con la validacion de la clave, comparando lo que esta en la base hasheado
         //con lo que escribio el usuario
+        //primero va lo que escrivio el usuario y despues la clave hascheada
         if (userToLogin) {
             let isOkPassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
             //el compare devuelve true o false
             //si es true redirecciona a la pagina de usuario
             if (isOkPassword) {
-                return res.redirect("/perfildelusuario")
+                return res.send("Puedes ingresar, usuario correcto")
             }
             return res.render("/vista de login", {
                 errors: {
@@ -104,18 +118,18 @@ const controller = {
             });
         }
         //si es false muestra la pagina del login con los errores
-        return res.render("/vista de login", {
+        return res.render("/user/login", {
             errors: {
-                mail: {
+                email: {
                     msg: "no se encuentra el mail en la base de datos"
                 }
             }
         })
-
+*/
     },
 
     profile: function (req, res) {
-
+        return res.render ("perfil")
     }
 
 
