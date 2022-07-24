@@ -24,18 +24,18 @@ const controller = {
         let userInDB = user.findByField("email", req.body.email) // validacion para ver si el email ya esta registrado en la base de datos
         //con el if pregunto si el usuario esta en la base devuelvo error, si no esta, lo crea
         if (userInDB) {
-            
+
             return res.render("registro", {
-                 errors: {
-                     email: {
-                        msg: "este mail ya esta registrado" 
+                errors: {
+                    email: {
+                        msg: "este mail ya esta registrado en la base de datos"
                     },
-                }, 
-                    oldData: req.body 
-                });
-            
+                },
+                oldData: req.body
+            });
+
         }
-        
+
 
         if (resultValidation.errors.length > 0) {
             return res.render("../views/registro", {
@@ -44,62 +44,39 @@ const controller = {
             })
         };
 
-       
-        
+
+
 
         if (resultValidation.isEmpty()) {
-          let user = {
-            ...req.body,
-            password: bcryptjs.hashSync(req.body.password, 10),
-            avatar:  req.file ? req.file.filename : '',
-          }
+            //crea usuario en base a lo que ingreso el usuario, pero encripta la clave y guarda la imagen (avatar)
+            // con la propiedad file de multer
+            let userToCreate = {
+                ...req.body,
+                password: bcryptjs.hashSync(req.body.password, 10),
+                avatar: req.file.filename
+            };
 
-       
 
-          let archivoUsers = fs.readFileSync(path.resolve(__dirname, '../database/user.json'), {encoding: 'utf-8'});
-          let users;
-          if (archivoUsers == "") {
+            let userCreate = user.create(userToCreate)
+
+            return res.redirect("/user/login"); //despues de crear el usuario redirigir a la vista login
+        }
+
+
+
+        let archivoUsers = fs.readFileSync(path.resolve(__dirname, '../database/user.json'), { encoding: 'utf-8' });
+        let users;
+        if (archivoUsers == "") {
             users = [];
-          } else {
+        } else {
             users = JSON.parse(archivoUsers);
-          };
-    
-          users.push(user);
-          usersJSON = JSON.stringify(users, null, 2);
-          fs.writeFileSync(path.resolve(__dirname, '../database/user.json'), usersJSON);
-          res.redirect('/user/login');
-        }
-
-
-      /*  if (resultValidation.errors.length > 0) {
-            return res.render("../views/registro", {
-                errors: resultValidation.mapped(),
-                oldData: req.body //mapped convierte el array en un objeto literal
-            })
         };
 
-        let userInDB = user.findByField("mail", req.body.mail) // validacion para ver si el email ya esta registrado en la base de datos
-        //con el if pregunto si el usuario esta en la base devuelvo error, si no esta, lo crea
-        if (userInDB) {
-            return res.render("../views/registro", { error: { msg: "este mail ya esta registrado" }, oldData: req.body });
-        }
-        //crea usuario en base a lo que ingreso el usuario, pero encripta la clave y guarda la imagen (avatar)
-        // con la propiedad file de multer
-        let userToCreate = {
-            ...req.body,
-            password: bcryptjs.hashSync(req.body.password, 10),
-            avatar: req.file.filename
-        };
-
-
-        let userCreate = user.create(userToCreate)
-
-        return res.redirect("/user/login"); //despues de crear el usuario redirigir a la vista login
-*/
-
+        users.push(userCreate);
+        usersJSON = JSON.stringify(userCreate, null, 2);
+        fs.writeFileSync(path.resolve(__dirname, '../database/user.json'), usersJSON);
+        res.redirect('/user/login');
     },
-
-
 
 
     login: function (req, res) {
@@ -141,7 +118,7 @@ const controller = {
 
     }
 
-}
 
+}
 
 module.exports = controller;

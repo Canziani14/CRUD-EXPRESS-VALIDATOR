@@ -1,3 +1,11 @@
 [
- 
+ {
+  "id": 1,
+  "fullName": "Matias Canziani",
+  "email": "mcanziani12@gmail.com",
+  "password": "$2a$10$/0I4BC/.kLO98zMIxdLqN.CfXTW7s.lhua9LS5r3o8.W6THSfyy5q",
+  "country": "2",
+  "avatar": "1658687502188_img .jpg"
+ }
+
 ]

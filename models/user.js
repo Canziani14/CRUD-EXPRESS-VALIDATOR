@@ -42,7 +42,7 @@ const user = {
         let allUsers = this.findAll();
         let lastUser = allUsers.pop (); //guarda el ultimo usuario creado para tener el ultimo id
         if (lastUser) {
-            return lastUser.id ; // le suma 1 al ultimo id
+            return lastUser.id + 1 ; // le suma 1 al ultimo id
         }
         return 1 ; // y si detecta que no hay nada empieza por el id 1
     },
@@ -57,7 +57,7 @@ const user = {
         }
         allUsers.push(newUser);  //dentro de allUser metemos el newUser
         fs.writeFileSync(this.filename, JSON.stringify (allUsers, null, " ")); // escribimos el archivo con el newUser
-        return ("Usuario Creado");
+        return newUser;
     },
 
     //eliminar usuario
