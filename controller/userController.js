@@ -24,8 +24,16 @@ const controller = {
         let userInDB = user.findByField("email", req.body.email) // validacion para ver si el email ya esta registrado en la base de datos
         //con el if pregunto si el usuario esta en la base devuelvo error, si no esta, lo crea
         if (userInDB) {
-            console.log(userInDB)
-            return res.render("../views/registro", { error: { msg: "este mail ya esta registrado" }, oldData: req.body });
+            
+            return res.render("registro", {
+                 errors: {
+                     email: {
+                        msg: "este mail ya esta registrado" 
+                    },
+                }, 
+                    oldData: req.body 
+                });
+            
         }
         
 
