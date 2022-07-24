@@ -91,11 +91,11 @@ const controller = {
 
     processLogin: function (req, res) {
         
-        return res.send(req.body)
+      
       
         
         
-        /*
+        
         
         //creo una variable para validar que no se encuentre ese mail ya registrado
         let userToLogin = user.findByField("email", req.body.email)
@@ -106,26 +106,27 @@ const controller = {
             let isOkPassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
             //el compare devuelve true o false
             //si es true redirecciona a la pagina de usuario
+            
             if (isOkPassword) {
-                return res.send("Puedes ingresar, usuario correcto")
+                return res.render("perfil")
             }
-            return res.render("/vista de login", {
+            return res.render("login", {
                 errors: {
-                    mail: {
-                        msg: "credenciales invalidas"
+                    password: {
+                        msg: "Contraseña Incorrecta"
                     }
                 }
             });
         }
         //si es false muestra la pagina del login con los errores
-        return res.render("/user/login", {
+        return res.render("login", {
             errors: {
                 email: {
                     msg: "no se encuentra el mail en la base de datos"
                 }
             }
         })
-*/
+
     },
 
     profile: function (req, res) {

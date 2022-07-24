@@ -22,7 +22,7 @@ router.get ("/login",userController.login);
 router.post ("/login",validaciones, userController.processLogin);
 
 //perfil del usuario
-router.get ("/:userId", userController.profile);
+router.get ("/profile", userController.profile);
 
 
 

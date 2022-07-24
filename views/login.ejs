@@ -57,7 +57,7 @@
                 <br><br>
 
                 <label for="password" class="label">Contraseña: </label>
-                <input type="password" name="password" id="new-password" placeholder="Contraseña" value= "<%= locals.oldData ? oldData.password : null %>">
+                <input type="password" name="password" id="password" placeholder="Ingrese su Contraseña" value= "<%= locals.oldData ? oldData.password : null %>">
                 <% if (locals.errors && errors.password) { %>
                     <!--si existen errores Y el error esta en password-->
                     <div class="text-danger">
