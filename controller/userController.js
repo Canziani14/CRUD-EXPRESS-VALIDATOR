@@ -90,13 +90,6 @@ const controller = {
     //Procesa el formulario de login
 
     processLogin: function (req, res) {
-        
-      
-      
-        
-        
-        
-        
         //creo una variable para validar que no se encuentre ese mail ya registrado
         let userToLogin = user.findByField("email", req.body.email)
         //si lo encuentra sigue con la validacion de la clave, comparando lo que esta en la base hasheado
@@ -108,7 +101,8 @@ const controller = {
             //si es true redirecciona a la pagina de usuario
             
             if (isOkPassword) {
-                return res.render("perfil")
+                req.session.userLogged = userToLogin; //con esto guardo los datos del usuario que entro a login y paso las validaciones
+                return res.redirect ("/user/profile")
             }
             return res.render("login", {
                 errors: {
@@ -126,11 +120,10 @@ const controller = {
                 }
             }
         })
-
     },
 
     profile: function (req, res) {
-        return res.render ("perfil")
+        return res.send (req.session)
     }
 
 

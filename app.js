@@ -1,11 +1,22 @@
 const express = require ("express");
 const { body } = require("express-validator");
 const app = express();
-const path = require("path")
+const path = require("path");
+const session = require ("express-session");
+
+
 //rutas
 const mainRoutes = require ("./routes/mainRouter");
 const userRoutes = require ("./routes/userRouter");
 
+
+//indico session
+//con session puedo acceder a todo lo que tengo en el 
+app.use (session({
+    secret : "Logeo de session",
+    resave: false,
+    saveUninitialized: false
+}));
 
 //indico que la carpeta dinamica es public
 app.use (express.static ("./public"));
@@ -24,9 +35,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set ("view engine", "ejs");
 
 
-
+//defino los use
 app.use ("/", mainRoutes);
 app.use ("/user", userRoutes);
-app.use ("/profile", userRoutes);
+
 
 
