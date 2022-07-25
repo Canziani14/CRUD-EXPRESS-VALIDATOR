@@ -101,6 +101,7 @@ const controller = {
             //si es true redirecciona a la pagina de usuario
             
             if (isOkPassword) {
+                delete userToLogin.password //con esto eliminamos almacenar la contraseña en sesion (es por seguridad)
                 req.session.userLogged = userToLogin; //con esto guardo los datos del usuario que entro a login y paso las validaciones
                 return res.redirect ("/user/profile")
             }
@@ -123,7 +124,9 @@ const controller = {
     },
 
     profile: function (req, res) {
-        return res.send (req.session)
+        return res.render ("perfil", {
+            user: req.session.userLogged
+        });
     }
 
 

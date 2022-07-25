@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <style>
-        body{
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            color: red
-        }
+       body {
+                text-align: center;
+                background-color: black;
+                color: red;
+            }
         img{
-            border-radius: 50%;
+            width: 150px;
+            height: 200px;
         }
+        
        
     </style>
     <meta charset="UTF-8">
@@ -19,8 +20,15 @@
     <title>Perfil</title>
 </head>
 <body>
-    <h1>Bienvenido a su Perfil <%=  %> </h1>
-    <img src="../public/images/avatar/ <%=  %>  " alt="">
+    <h1>Bienvenido a su Perfil </h1>
+    <br><br><br>
+    
+    <figure class=>    
+    <img src="/images/avatar/<%= user.avatar %>" alt="">
+    <figcaption><%= user.fullName %> </figcaption>
+    <figcaption><%= user.email %> </figcaption>
+    <figcaption>Su numero de ID: <%= user.id %> </figcaption>
+    </figure>
 
 </body>
 </html> 

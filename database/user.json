@@ -3,16 +3,9 @@
   "id": 1,
   "fullName": "Matias Canziani",
   "email": "mcanziani12@gmail.com",
-  "password": "$2a$10$L29KxjcmdtqX4duHl.yaneicC9zHkjE1Ed7kq7pl96CltFWm4nJCy",
+  "password": "$2a$10$vUNxUH0nfeSD3r7/C3HN0OEOhdi097eXPZfYgvvpCdrhcoYOmbbuK",
   "country": "0",
-  "avatar": "1658697878931_img .jpg"
- },
- {
-  "id": 2,
-  "fullName": "Amelie Canziani",
-  "email": "ameliecanziani@gmail.com",
-  "password": "$2a$10$dEN2H2zXDfa.lK.r/o8fQu8lCGbuunc32sHGKirMcrXDwQRfYSpKW",
-  "country": "0",
-  "avatar": "1658704560926_img .jpg"
+  "avatar": "1658711126011_img .jpg"
  }
+
 ]
