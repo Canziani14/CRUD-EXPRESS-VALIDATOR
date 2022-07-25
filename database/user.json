@@ -6,6 +6,13 @@
   "password": "$2a$10$vUNxUH0nfeSD3r7/C3HN0OEOhdi097eXPZfYgvvpCdrhcoYOmbbuK",
   "country": "0",
   "avatar": "1658711126011_img .jpg"
+ },
+ {
+  "id": 2,
+  "fullName": "Amelie Canziani",
+  "email": "ameliecanziani@gmail.com",
+  "password": "$2a$10$Gc1v9gWueQmdhJ/cHWe97.uQ3iebYd1EdRqSGG.6GgauNEbg/Imue",
+  "country": "0",
+  "avatar": "1658747904455_img .jpg"
  }
-
 ]
