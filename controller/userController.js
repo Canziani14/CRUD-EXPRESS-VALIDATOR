@@ -130,7 +130,8 @@ const controller = {
     //logout
     // solo borra todo lo que esta en session
     logout: function (req, res) {
-        req.session.destroy()
+        res.clearCookie ("userEmail") //elimino la cookie
+        req.session.destroy() //elimino la session
         return res.redirect ("/"); // y redirijo a la home
     }
 
