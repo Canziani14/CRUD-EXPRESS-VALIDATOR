@@ -3,12 +3,15 @@ const { body } = require("express-validator");
 const app = express();
 const path = require("path");
 const session = require ("express-session");
+const userLoggedMiddleware= require ("./middlewares/userMiddlewawre")
 
 
 //rutas
 const mainRoutes = require ("./routes/mainRouter");
 const userRoutes = require ("./routes/userRouter");
 
+//pido usar el middle de aplicacion que va a mostrar o no los objetos de la barra de navegacion del header
+app.use (userLoggedMiddleware)
 
 //indico session
 //con session puedo acceder a todo lo que tengo en el 

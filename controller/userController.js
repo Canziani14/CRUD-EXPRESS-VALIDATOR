@@ -122,11 +122,17 @@ const controller = {
             }
         })
     },
-
+    //con esto le mando al perfil la sesion del usuario que se habia logueado
     profile: function (req, res) {
         return res.render ("perfil", {
-            user: req.session.userLogged
+            user: req.session.userLogged   //indico que de session utilice userlogged, que contiene guardado al usuario que ingreso
         });
+    },
+    //logout
+    // solo borra todo lo que esta en session
+    logout: function (req, res) {
+        req.session.destroy()
+        return res.redirect ("/"); // y redirijo a la home
     }
 
 
