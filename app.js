@@ -10,8 +10,7 @@ const userLoggedMiddleware= require ("./middlewares/userMiddlewawre")
 const mainRoutes = require ("./routes/mainRouter");
 const userRoutes = require ("./routes/userRouter");
 
-//pido usar el middle de aplicacion que va a mostrar o no los objetos de la barra de navegacion del header
-app.use (userLoggedMiddleware)
+
 
 //indico session
 //con session puedo acceder a todo lo que tengo en el 
@@ -20,6 +19,9 @@ app.use (session({
     resave: false,
     saveUninitialized: false
 }));
+
+//pido usar el middle de aplicacion que va a mostrar o no los objetos de la barra de navegacion del header
+app.use (userLoggedMiddleware)
 
 //indico que la carpeta dinamica es public
 app.use (express.static ("./public"));

@@ -40,6 +40,24 @@
 </head>
 
 <body>
+    <header>
+
+        <% if (locals.isLogged) { %>
+            <div>
+                <select name="HiUser" id="HiUser">
+                    <option value="Hi">Hi Maty</option>
+                    <option value="Logout">Logout</option>
+                </select>
+         
+        <% } else { %>
+            <a href="/user/register">Registro</a>
+
+            <a href="/user/login">Login</a>
+        </div>
+
+        <% } %>
+
+    </header>
 
     
 

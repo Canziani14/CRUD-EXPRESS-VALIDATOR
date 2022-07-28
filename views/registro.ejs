@@ -22,6 +22,23 @@
             }
         </style>  
     </head>
+    <header>
+        <% if (locals.isLogged) { %>
+            <div>
+                <select name="HiUser" id="HiUser">
+                    <option value="Hi">Hi Maty</option>
+                    <option value="Logout">Logout</option>
+                </select>
+         
+        <% } else { %>
+            <a href="/user/register">Registro</a>
+
+            <a href="/user/login">Login</a>
+        </div>
+
+        <% } %>
+
+    </header>
 
     <form action="/user/register" class="form" method="POST" enctype="multipart/form-data">
         <!--el enctype es lo que habilita la carga de imagenes, si el form no tiene carga de imagen no poner-->
