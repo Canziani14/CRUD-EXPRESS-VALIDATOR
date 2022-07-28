@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const session = require ("express-session");
 const userLoggedMiddleware= require ("./middlewares/userMiddlewawre")
+const cookies = require ("cookie-parser");
 
 
 //rutas
@@ -11,6 +12,9 @@ const mainRoutes = require ("./routes/mainRouter");
 const userRoutes = require ("./routes/userRouter");
 
 
+
+//pido usar cookies, permite trabajar directamente en req y res con un objeto literal
+app.use (cookies());
 
 //indico session
 //con session puedo acceder a todo lo que tengo en el 
@@ -21,7 +25,9 @@ app.use (session({
 }));
 
 //pido usar el middle de aplicacion que va a mostrar o no los objetos de la barra de navegacion del header
-app.use (userLoggedMiddleware)
+app.use (userLoggedMiddleware);
+
+
 
 //indico que la carpeta dinamica es public
 app.use (express.static ("./public"));

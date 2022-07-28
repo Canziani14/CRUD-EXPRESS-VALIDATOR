@@ -7,6 +7,7 @@ const guestMiddleware = require ("../middlewares/guestMiddleware");
 const authMiddleware = require ("../middlewares/authMiddleware");
 
 
+
 //formulario de registro
 router.get("/register", guestMiddleware,  userController.register); //le paso un middleware que verifica si hay un usuario, si hay un usuario ehecuta el middle
 //procesamiento de registro

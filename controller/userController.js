@@ -1,15 +1,8 @@
-const users = require("../database/user.json");
 const fs = require("fs");
 const path = require("path");
 const bcryptjs = require("bcryptjs");
-const multer = require("multer");
 const { validationResult, body } = require("express-validator"); //requiere una funcion de express validator, se le pasa todo el req
 const user = require("../models/user");
-const validaciones = require("../middlewares/validateRegisterMiddleware");
-const uploadFile = require("../middlewares/multerMiddleware");
-
-
-
 
 
 
@@ -103,6 +96,12 @@ const controller = {
             if (isOkPassword) {
                 delete userToLogin.password //con esto eliminamos almacenar la contraseña en sesion (es por seguridad)
                 req.session.userLogged = userToLogin; //con esto guardo los datos del usuario que entro a login y paso las validaciones
+
+                if (req.body.remember_user) {//remember_user es como se llama en el formulario el checkbox
+                    res.cookie("userEmail", req.body.email, {maxAge:(1000*60)*2})//metodo que tengo en el res que permite guardar algo en el navegador
+                }//como las mando viajan en el res
+                //la cookie lleva primero el nombre que le damos, despues lo que va a guardar y despues la duracion
+
                 return res.redirect ("/user/profile")
             }
             return res.render("login", {

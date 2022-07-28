@@ -28,6 +28,10 @@
             margin-left: 80px;
             margin-right: 30px;
         }
+        .perfil{
+            width: 55px;
+            height: 55px;
+        }
         
     </style>
     <meta charset="UTF-8">
@@ -40,8 +44,9 @@
 
         <% if (locals.isLogged) { %>
             <div>
+                <img class="perfil" src="/images/avatar/<%= locals.userLogged.avatar %> "  alt="">
                 <select name="HiUser" id="HiUser">
-                    <option value="Hi">Hi Maty</option>
+                    <option value="Hi">Hi <%= locals.userLogged.fullName %> </option>
                     <option value="Logout">Logout</option>
                 </select>
          
